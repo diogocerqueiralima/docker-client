@@ -1,0 +1,7 @@
+[versions]
+okhttp = "5.1.0"
+jnr-unixsocket = "0.38.23"
+
+[libraries]
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+jnr-unixsocket = { module = "com.github.jnr:jnr-unixsocket", version.ref = "jnr-unixsocket" }
