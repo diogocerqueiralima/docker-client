@@ -55,6 +55,11 @@ public class DockerClientConfig {
             return this;
         }
 
+        public Builder socketFile(String socketFile) {
+            this.socketFile = new File(socketFile);
+            return this;
+        }
+
         public DockerClientConfig build() {
             return new DockerClientConfig(connection, socketFile);
         }

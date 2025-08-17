@@ -1,13 +1,27 @@
 package com.github.diogocerqueiralima;
 
-import okhttp3.OkHttpClient;
+import com.github.diogocerqueiralima.resources.ContainersResource;
+import retrofit2.Retrofit;
 
-public class DockerClient {
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-    private final OkHttpClient httpClient;
+public class DockerClient implements AutoCloseable {
 
-    protected DockerClient(OkHttpClient httpClient) {
-        this.httpClient = httpClient;
+    private final ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
+    private final ContainersResource containersResource;
+
+    protected DockerClient(Retrofit retrofit) {
+        this.containersResource = new ContainersResource(retrofit, executor);
+    }
+
+    public ContainersResource containers() {
+        return this.containersResource;
+    }
+
+    @Override
+    public void close() {
+        executor.close();
     }
 
 }
